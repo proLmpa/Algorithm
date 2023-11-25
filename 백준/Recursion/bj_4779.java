@@ -1,30 +1,27 @@
-package Recursion;
-
-import java.io.*;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class bj_4779 {
-    static final int SIZE = 12;
-    static final String DASH = "-";
-    static final String SPACE = " ";
-    static String[] dash = new String[SIZE + 1];
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        factorial(SIZE);
+        StringBuilder sb = new StringBuilder();
 
-        String str;
-        while((str = br.readLine()) != null) {
-            int N = Integer.parseInt(str);
-            System.out.println(factorial(N));
+        String[] kantour = new String[13];
+        kantour[0] = "-";
+        for(int i = 1; i <= 12; i++) {
+            int dash = (int) Math.pow(3, i-1);
+            kantour[i] = kantour[i - 1] + " ".repeat(dash) + kantour[i - 1];
         }
-    }
 
-    static String factorial(int N){
-        if(N == 0) return dash[0] = DASH;
-        if(dash[N] != null) return dash[N];
+        String tmp;
+        while((tmp = br.readLine()) != null) {
+            if(tmp.equals("")) break;
+            int x = Integer.parseInt(tmp);
+            sb.append(kantour[x] + "\n");
+        }
 
-        double temp = Math.pow(3, N-1);
-        return dash[N] = factorial(N-1) + SPACE.repeat((int)temp) + factorial(N-1);
+        System.out.print(sb);
     }
-} // 240 ms
+}
